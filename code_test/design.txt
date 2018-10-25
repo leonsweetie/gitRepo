@@ -1,0 +1,17 @@
+Ideas:
+	Basically, there are 2 main approaches that we have. Both of them need to 
+	sort the json array.
+		
+		(1) sort all array by "trace_id" and then "time", and paser the sorted 
+		array to output error stack under the same "trace_id".
+			- time complexity: o(nlog(n)) -- since we need to sort whole array.
+			- space complexity: o(1)
+		
+		(2) Assume that the error only happen very rare in the runtime, say less
+		than 1%, we can optimize the algorithm, by pass whole array first and 
+		grab all "trace_id" with "error"=true (the number of "trace_id" should 
+		be very small compare to the whole array). Go over the "trace_id" list, 
+		and get the all records related to the "trace_id" and sort and output.
+			- time complexity: 	o(n) -- the best case.
+								o(n^2) -- the worst case. (It should not happend.)
+			- space complexity: o(1)
